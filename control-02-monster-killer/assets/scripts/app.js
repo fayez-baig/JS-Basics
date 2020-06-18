@@ -12,13 +12,24 @@ const LOG_EVENT_PLAYER_HEAL = "PLAYER_HEAL";
 const LOG_EVENT_GAME_OVER = "GAME_OVER";
 
 let battleLog = [];
-let enteredvalue = prompt("enter Max Health");
+function getUserInput() {
+  let enteredvalue = prompt("enter Max Health");
+  const parsedValue = +enteredvalue;
 
-if (isNaN(enteredvalue) || enteredvalue <= 0 || enteredvalue >= 100) {
-  enteredvalue = 100;
+  if (isNaN(parsedValue) || parsedValue <= 0 || parsedValue >= 100) {
+    throw { message: "Invalid User Input !" };
+  }
+  return enteredvalue;
 }
 
-let choosenMaxLife = +enteredvalue;
+let choosenMaxLife;
+try {
+  choosenMaxLife = getUserInput();
+} catch (error) {
+  console.log(error);
+  choosenMaxLife = 100;
+  alert("you entered some thing wrong, default value of 100 is set");
+}
 let hasBonusLife = true;
 let currentMonsterHealth = choosenMaxLife;
 let currentPlayerHealth = choosenMaxLife;
@@ -143,7 +154,9 @@ function writeToLog(ev, val, monsterHealth, playerHealth) {
 }
 
 function printLogHandler() {
-  console.log(battleLog);
+  for (const i of battleLog) {
+    console.log(i);
+  }
 }
 
 function attackHandler() {
