@@ -24,49 +24,75 @@ function writeToLog(operationIdentifier, prevResult, operationNum, newResult) {
   console.log(logEntries);
 }
 
-function calculateResult(calculationType) {
+// function calculateResult(calculationType) {
+//   const enteredNumber = getUserInput();
+//   const initResult = currentResult;
+//   let mathOperator;
+//   if (calculationType === "ADD") {
+//     currentResult += enteredNumber;
+//     mathOperator = "+";
+//     createAndWriteOutput(mathOperator, initResult, enteredNumber);
+//     writeToLog(calculationType, initResult, enteredNumber, currentResult);
+//   } else if (calculationType === "SUBTRACT") {
+//     mathOperator = "-";
+//     currentResult -= enteredNumber;
+//     createAndWriteOutput(mathOperator, initResult, enteredNumber);
+//     writeToLog(calculationType, initResult, enteredNumber, currentResult);
+//   } else if (calculationType === "MULTIPLY") {
+//     mathOperator = "*";
+//     currentResult *= enteredNumber;
+//     createAndWriteOutput(mathOperator, initResult, enteredNumber);
+//     writeToLog(calculationType, initResult, enteredNumber, currentResult);
+//   } else if (calculationType === "DIVISION") {
+//     mathOperator = "/";
+//     currentResult /= enteredNumber;
+//     createAndWriteOutput(mathOperator, initResult, enteredNumber);
+//     writeToLog(calculationType, initResult, enteredNumber, currentResult);
+//   }
+// }
+// function add() {
+//   calculateResult("ADD");
+// }
+
+// function subtract() {
+//   calculateResult("SUBTRACT");
+// }
+
+// function multiply() {
+//   calculateResult("MULTIPLY");
+// }
+
+// function division() {
+//   calculateResult("DIVISION");
+// }
+
+// addBtn.addEventListener("click", add);
+// subtractBtn.addEventListener("click", subtract);
+// multiplyBtn.addEventListener("click", multiply);
+// divideBtn.addEventListener("click", division);
+
+function calculate(operation) {
   const enteredNumber = getUserInput();
-  const initResult = currentResult;
-  let mathOperator;
-  if (calculationType === "ADD") {
+  const initialResult = currentResult;
+  let operator;
+  if (operation === "ADD") {
     currentResult += enteredNumber;
-    mathOperator = "+";
-    createAndWriteOutput(mathOperator, initResult, enteredNumber);
-    writeToLog(calculationType, initResult, enteredNumber, currentResult);
-  } else if (calculationType === "SUBTRACT") {
-    mathOperator = "-";
+    operator = "+";
+  } else if (operation === "SUBTRACT") {
     currentResult -= enteredNumber;
-    createAndWriteOutput(mathOperator, initResult, enteredNumber);
-    writeToLog(calculationType, initResult, enteredNumber, currentResult);
-  } else if (calculationType === "MULTIPLY") {
-    mathOperator = "*";
+    operator = "-";
+  } else if (operation === "MULTIPLY") {
     currentResult *= enteredNumber;
-    createAndWriteOutput(mathOperator, initResult, enteredNumber);
-    writeToLog(calculationType, initResult, enteredNumber, currentResult);
-  } else if (calculationType === "DIVISION") {
-    mathOperator = "/";
+    operator = "*";
+  } else {
     currentResult /= enteredNumber;
-    createAndWriteOutput(mathOperator, initResult, enteredNumber);
-    writeToLog(calculationType, initResult, enteredNumber, currentResult);
+    operator = "/";
   }
-}
-function add() {
-  calculateResult("ADD");
-}
-
-function subtract() {
-  calculateResult("SUBTRACT");
+  createAndWriteOutput(operator, initialResult, enteredNumber);
+  writeToLog(operation, initialResult, enteredNumber, currentResult);
 }
 
-function multiply() {
-  calculateResult("MULTIPLY");
-}
-
-function division() {
-  calculateResult("DIVISION");
-}
-
-addBtn.addEventListener("click", add);
-subtractBtn.addEventListener("click", subtract);
-multiplyBtn.addEventListener("click", multiply);
-divideBtn.addEventListener("click", division);
+addBtn.addEventListener("click", calculate.bind(this, "ADD"));
+subtractBtn.addEventListener("click", calculate.bind(this, "SUBTRACT"));
+multiplyBtn.addEventListener("click", calculate.bind(this, "MULTIPLY"));
+divideBtn.addEventListener("click", calculate.bind(this, "DIVIDE"));
